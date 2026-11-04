@@ -6,20 +6,25 @@ using namespace std;
 void move_left(int board[][5], int numrows = 5)
 {
 	//CODE HERE
+	//move all numbers to the left
 	for (int row = 0; row < 5; row++)
 	{
+		//start at the leftmost column
     	int targetColumn = 0;
-
+		//Examine each column, moving left to right
     	for (int col = 0; col < 5; col++)
     	{
+			//Ignore zeroes
         	if (board[row][col] != 0)
         	{
             	if (col != targetColumn)
             	{
+					//move to target column
                		board[row][targetColumn] = board[row][col];
+					//clear the original position
                 	board[row][col] = 0;
             	}
-
+				//move the target position one column right
             	targetColumn++;
         	}
     	}
