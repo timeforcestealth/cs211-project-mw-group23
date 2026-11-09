@@ -5,7 +5,7 @@ using namespace std;
 
 void move_left(int board[][5], int numrows = 5)
 {
-	//Move left w/ merging
+	//Move left before merge
 	for (int row = 0; row < 5; row++)
 	{
 		// Start at the leftmost column
@@ -65,12 +65,124 @@ void move_left(int board[][5], int numrows = 5)
 
 void move_right(int board[][5], int numrows = 5)
 {
-	//CODE HERE
+	//Move right before merge
+	for (int row = 4; row >= 0; row--)
+	{
+		// Start at the rightmost column
+		int targetColumn = 4;
+
+		// Move all numbers right
+		for (int col = 4; col >= 0; col--)
+		{
+			//check if the number is 0 or not
+			if (board[row][col] != 0)
+			{
+				//If not in leftmost column
+				if (col != targetColumn)
+				{
+					board[row][targetColumn] = board[row][col];
+					board[row][col] = 0;
+				}
+				//Move all numbers left 
+				targetColumn--;
+			}
+		}
+		//Merge matching numbers in the direction of last movement
+		for (int col = 4; col >= 0; col--)
+		{
+			//Check if the number to the right is the same number
+			if (board[row][col] != 0 &&
+				board[row][col] == board[row][col - 1])
+			{
+				// Double the right number
+				board[row][col] *= 2;
+
+				// Remove the right number
+				board[row][col - 1] = 0;
+				// Skip the number that just merged
+					col--;
+				}
+			}
+			targetColumn = 4;
+
+			// Move all numbers right
+			for (int col = 4; col >= 0; col--)
+			{
+				//check if the number is 0 or not
+				if (board[row][col] != 0)
+				{
+					//If not in leftmost column
+					if (col != targetColumn)
+					{
+						board[row][targetColumn] = board[row][col];
+						board[row][col] = 0;
+					}
+					//Move all numbers left 
+					targetColumn--;
+				}
+			}	
+	}
 }
 
 void move_up(int board[][5], int numrows = 5)
 {
-	//CODE HERE
+	//Move right before merge
+	for (int row = 0; row < 5; row++)
+	{
+		// Start at the topmost row
+		int targetRow = 4;
+
+		// Move all numbers right
+		for (int col = 4; col >= 0; col--)
+		{
+			//check if the number is 0 or not
+			if (board[row][col] != 0)
+			{
+				//If not in leftmost column
+				if (col != targetRow)
+				{
+					board[targetRow][col] = board[row][col];
+					board[row][col] = 0;
+				}
+				//Move all numbers left 
+				targetRow++;
+			}
+		}
+		//Merge matching numbers in the direction of last movement
+		for (int col = 4; col >= 0; col--)
+		{
+			//Check if the number to the right is the same number
+			if (board[row][col] != 0 &&
+				board[row][col] == board[row][col - 1])
+			{
+				// Double the right number
+				board[row][col] *= 2;
+
+				// Remove the right number
+				board[row][col - 1] = 0;
+				// Skip the number that just merged
+					col--;
+				}
+			}
+			targetColumn = 4;
+
+			// Move all numbers right
+			for (int col = 4; col >= 0; col--)
+			{
+				//check if the number is 0 or not
+				if (board[row][col] != 0)
+				{
+					//If not in leftmost column
+					if (col != targetColumn)
+					{
+						board[row][targetColumn] = board[row][col];
+						board[row][col] = 0;
+					}
+					//Move all numbers left 
+					targetColumn--;
+				}
+			}	
+	}
 }
 
 void move_down(int board[][5], int numrows = 5)
