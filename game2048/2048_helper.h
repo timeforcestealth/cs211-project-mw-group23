@@ -3,6 +3,8 @@
 #include <iomanip>
 using namespace std;
 
+int score = 0; 
+
 void move_left(int board[][5], int numrows = 5)
 {
 	//Move left w/ merging
@@ -36,6 +38,9 @@ void move_left(int board[][5], int numrows = 5)
 			{
 				// Double the left number
 				board[row][col] *= 2;
+
+				//the merged number is added to the score
+				score += board[row][col]; 
 
 				// Remove the right number
 				board[row][col + 1] = 0;
@@ -97,6 +102,9 @@ void move_right(int board[][5], int numrows = 5)
 				// Double the right number
 				board[row][col] *= 2;
 
+				//the merged number is added to the score
+				score += board[row][col];
+
 				// Remove the left number
 				board[row][col - 1] = 0;
 
@@ -157,6 +165,9 @@ void move_up(int board[][5], int numrows = 5)
 				// Double the upper number
 				board[row][col] *= 2;
 
+				//the merged number is added to the score
+				score += board[row][col];
+
 				// Remove the lower number
 				board[row + 1][col] = 0;
 				// Skip the number that just merged
@@ -192,7 +203,7 @@ void move_down(int board[][5], int numrows = 5)
 		// Start at the bottommost row
 		int targetRow = 4;
 
-		// Move all numbers right
+		// Move all numbers down
 		for (int row = 4; row >= 0; row--)
 		{
 			//check if the number is 0 or not
@@ -217,6 +228,9 @@ void move_down(int board[][5], int numrows = 5)
 			{
 				// Double the lower number
 				board[row][col] *= 2;
+
+				//the merged number is added to the score
+				score += board[row][col];
 
 				// Remove the upper number
 				board[row - 1][col] = 0;
@@ -264,7 +278,7 @@ void print_board(int board[][5], int numrows = 5)
 		cout << "\t|" << endl;
 		cout << "\t-----------------------------------------" << endl;
 	}
-
+	cout << "Score: " << score; 
 	cout << "\t" << endl << endl;
 }
 
