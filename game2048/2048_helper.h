@@ -65,19 +65,73 @@ void move_left(int board[][5], int numrows = 5)
 
 void move_right(int board[][5], int numrows = 5)
 {
-	//CODE HERE
+	//Move right w/ merging
+	for (int row = 4; row >=0; row--)
+	{
+		// Start at the rightmost column
+		int targetColumn = 4;
+
+		// Move all numbers right
+		for (int col = 4; col >= 0; col--)
+		{
+			//check if the number is 0 or not
+			if (board[row][col] != 0)
+			{
+				//If not in rightmost column
+				if (col != targetColumn)
+				{
+					board[row][targetColumn] = board[row][col];
+					board[row][col] = 0;
+				}
+				//Move all numbers right
+				targetColumn--;
+			}
+		}
+		//Merge matching numbers in the direction of last movement
+		for (int col = 4; col >=0; col--)
+		{
+			//Check if the number to the left is the same number
+			if (board[row][col] != 0 &&
+				board[row][col] == board[row][col - 1])
+			{
+				// Double the right number
+				board[row][col] *= 2;
+
+				// Remove the left number
+				board[row][col - 1] = 0;
+
+				// Skip the number that just merged
+				col--;
+			}
+		}
+		//Move remaining numbers right again
+		targetColumn = 4;
+
+		for (int col = 4; col >=0; col--)
+		{
+			if (board[row][col] != 0)
+			{
+				if (col != targetColumn)
+				{
+					board[row][targetColumn] = board[row][col];
+					board[row][col] = 0;
+				}
+
+				targetColumn--;
+			}
+		}
+	}
 }
 
 void move_up(int board[][5], int numrows = 5)
 {
-<<<<<<< HEAD
-	//Move right before merge
+	//Move up before merge
 	for (int col = 0; col < 5; col++)
 	{
 		// Start at the topmost row
 		int targetRow = 0;
 
-		// Move all numbers right
+		// Move all numbers up
 		for (int row = 0; row < 5; row++)
 		{
 			//check if the number is 0 or not
@@ -89,14 +143,14 @@ void move_up(int board[][5], int numrows = 5)
 					board[targetRow][col] = board[row][col];
 					board[row][col] = 0;
 				}
-				//Move all numbers left 
+				//Move all numbers up 
 				targetRow++;
 			}
 		}
 		//Merge matching numbers in the direction of last movement
 		for (int row = 0; row < 4; row++)
 		{
-			//Check if the number bellow is the same number
+			//Check if the number below is the same number
 			if (board[row][col] != 0 &&
 				board[row][col] == board[row + 1][col])
 			{
@@ -111,13 +165,13 @@ void move_up(int board[][5], int numrows = 5)
 			}
 			targetRow = 0;
 
-			// Move all numbers right
+			// Move all numbers up
 			for (int row = 0; row < 5; row++)
 			{
 				//check if the number is 0 or not
 				if (board[row][col] != 0)
 				{
-					//If not in leftmost column
+					//If not in upperrmost column
 					if (row != targetRow)
 					{
 						board[targetRow][col] = board[row][col];
@@ -128,14 +182,10 @@ void move_up(int board[][5], int numrows = 5)
 				}
 			}	
 	}
-=======
-	//CODE HERE
->>>>>>> parent of d7d6f12 (Update 2048_helper.h)
 }
 
 void move_down(int board[][5], int numrows = 5)
 {
-	//CODE HERE
 	//Move down before merge
 	for (int col = 4; col >= 0; col--)
 	{
