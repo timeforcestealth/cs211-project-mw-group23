@@ -37,6 +37,12 @@ int main()
 		insert_random(board, size);
 		print_board(board);
 
+		if (game_over(board))
+		{
+    		cout << "GAME OVER!" << endl;
+    		choice = 'e'; 
+		}
+
 	}
 
 

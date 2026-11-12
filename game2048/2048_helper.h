@@ -282,6 +282,35 @@ void print_board(int board[][5], int numrows = 5)
 	cout << "\t" << endl << endl;
 }
 
+bool game_over(int board[][5], int numrows = 5)
+{
+	//check every number on the board
+	for (int row = 0; row<5; row++)
+	{
+		for (int col = 0; col<5; col++)
+		{
+			//is the space if a zero, return false, the game can continue
+			if (board[row][col] == 0)
+			{
+				return false; 
+			}
+			//check to the right for equal number
+			if (col < 4 && board [row][col] == board[row][col+1])
+			{
+				return false; 
+			}
+
+			//check below for equal number
+			if(row <4 && board[row][col] == board[row+1][col])
+			{
+				return false; 
+			}
+		}
+		 
+	}
+	//no empty spaces or equal numbers found
+	return true;
+}
 
 void insert_random(int board[][5], int numrows = 5)
 {
