@@ -1,5 +1,6 @@
 #include <iostream>
 #include "2048_helper.h"
+#include <fstream>
 using namespace std;
 
 int main()
@@ -21,7 +22,7 @@ int main()
 	while (choice != 'e')
 	{
 
-		cout << "Please enter choice:{u,d,l,r,e} for UP, DOWN, LEFT, RIGHT, Exit: " << endl;
+		cout << "Please enter choice:{u,d,l,r,e,s,f} for UP, DOWN, LEFT, RIGHT, EXIT, SAVE, LOAD: " << endl;
 		cout << "Choice: ";
 		cin >> choice;
 
@@ -33,7 +34,20 @@ int main()
 			move_left(board, size);
 		else if (choice == 'r')
 			move_right(board, size);
-
+		else if (choice == 's')
+        {
+            cout << (save_game(board) ? "Game saved.\n" : "Could not save game.\n");
+            continue;
+        }
+        else if (choice == 'f')
+        {
+            if (load_game(board))
+            {
+                cout << "Game loaded.\n";
+                print_board(board);
+            }
+            continue;
+        }
 		insert_random(board, size);
 		print_board(board);
 
