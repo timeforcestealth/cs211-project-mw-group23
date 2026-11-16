@@ -1,6 +1,7 @@
 #include <iostream>
 #include <random>
 #include <iomanip>
+#include <fstream>
 using namespace std;
 
 int score = 0; 
@@ -343,5 +344,58 @@ void insert_random(int board[][5], int numrows = 5)
 		}
 
 	}
+}
+bool save_game(const int board[][5]) // Saves the current game state to a file
+{
+    ofstream file("save.txt"); // Open the save file for writing
+    if (!file) // Check if the file was successfully opened
+        return false; // Could not open the save file for writing
+
+    // Save the current score and board to the file
+
+    file << score << ' '; // Save the current score to the file
+    for (int row = 0; row < 5; row++) // Save each row of the board to the file
+    {
+        for (int col = 0; col < 5; col++) // Save each column of the current row to the file
+            file << board[row][col] << ' '; // Save the current cell to the file
+        file << ' '; // End of the current row
+    }
+
+    file.close(); // Close the save file after writing
+    return !file.fail(); // Return true if the file was successfully written, false otherwise
+}
+
+bool load_game(int board[][5]) // Loads the game state from a file
+{
+    ifstream file("save.txt"); // Open the save file for reading
+    if (!file) // Check if the file was successfully opened
+        return false; // Could not open the save file for reading
+
+    int loaded_score; // Variable to store the loaded score from the save file
+    int loaded_board[5][5]; // Variable to store the loaded board from the save file
+
+    if (!(file >> loaded_score) || loaded_score < 0) // Read the saved score and validate it
+        return false; // Invalid score in the save file
+
+    for (int row = 0; row < 5; row++) // Read each row of the board from the save file
+    {
+        for (int col = 0; col < 5; col++)
+        {
+            int value; // Variable to store the value of the current cell from the save file
+            if (!(file >> value) || value < 0 || // Read the value and validate it
+                (value != 0 && (value < 2 || (value & (value - 1)) != 0))) // Check if the value is a valid 2048 tile
+                return false; // Invalid value in the save file
+
+            loaded_board[row][col] = value; // Store the validated value in the loaded board
+        }
+    }
+
+    // Only replace the current game after the whole save is valid.
+    score = loaded_score; // Update the current score with the loaded score
+    for (int row = 0; row < 5; row++) // Update each row of the current board with the loaded board
+        for (int col = 0; col < 5; col++) // Update each column of the current row with the loaded board
+            board[row][col] = loaded_board[row][col]; // Copy the value from the loaded board to the current board
+
+    return true;
 }
 
