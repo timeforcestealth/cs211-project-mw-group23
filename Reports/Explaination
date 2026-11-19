@@ -7,19 +7,25 @@ Game2048:
   Moving left:
       when moving left, code starts from the leftmost column of the matrix, and moves every nonzero number to its leftmost possible postition
       then, starting at the leftmost column, each number is checked if the number immediatly to the right matches, if it does, the left number is doubled, added to the score, and then the right number is deleted
-      once all possible merges are completed, starting from the leftmost column again, all numbers are moved left as long as the number to its left is 0
+      once all possible merges are completed, starting from the leftmost column again, all numbers are moved to the leftmost possible position once again. 
 
   Moving Right:
-    This happens with moving right, but starting at the rightmost column instead, and doubling numbers to the right instead of the left when merging
+    This happens with moving right, but starting at the rightmost column instead, and doubling righthand tile instead of the left when merging
 
   Moving up and Down:
     Up and down does the same thing, but starts at the topmost or bottommost rows, and doubles either the top or bottom number repsectively when merging based on direction moved
 
+  Inserting a Random Number:
+    After all moving and merging is completed, a nested loop checks for empty spaces on the board, counts them to insure that placing a number is possible, and then generates a random location to insert a new random number until it finds an empty space
+    The Board is then re-printed, with all movement, merging, and the newly generated number placed
+    the game then runs a game_over check
+
   Game over:
     For game over, after every move before the game asks the player to give another input, a nested loop checks each space on the board to see if any moves are possible in the space to the right and below, whether that be an empty space or a possible merge
-    3 conditions must be true for the entire board in order to trigger a game over, ands if even one space returns false, the game will not end. 
+    3 conditions must be true over the entire board in order to trigger a game over, ands if even one space returns false, the game will not end. 
     the 3 condtions are: that there are no spaces with a 0, there are no possible moves to the right, and no possible moves below. 
     When all 3 conditions return true for every space on the entire board, the overall function returns true, and the game ends. 
+    if any space returns false, the game asks the user for another input and continues this loop until the either user inputs the exit command, or the conditions for game over are met. 
 
   Save/Load:
     
