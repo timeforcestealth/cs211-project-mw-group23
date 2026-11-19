@@ -27,7 +27,8 @@ Game2048:
     When all 3 conditions hold true for every space on the entire 5x5 board, the overall function returns true, the exit function is called, and a "game over" message is printed. 
     if all 3 conditions do not hold true over the entire 5x5 board, the game asks the user for another input and continues the gameplay loop until either the user inputs the exit command, or the conditions for game over are met. 
 
-  Save/Load:
+  Save/Load: For Save, it takes the score first and inputs it into a txt file named save, it then takes the matrix values and inputs them into the same file.
+For load, it looks in the save.txt file and takes the score and matrix valeus and inputs them back into the matrix and score value.
     
 
 Luhn: 
