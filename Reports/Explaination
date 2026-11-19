@@ -1,1 +1,13 @@
+Game2048:
 
+
+Luhn: 
+The code starts with initializing a string of garbage numbers
+Asks for 16 digit number
+First loops to check if it is 16 digits long
+Then loops to check if all of them are digits
+After it checks all of that, it then goes into a loop to starting to add the digits together from the last digit up to the first.
+Every second digit is doubled per the rules of the Luhn and this is done with a true or false statement switching back and forth every iteration.
+When it is true it will double the digit and if it is greater than 9 it will subtract it by 9 until it is a single digit, then adds to the sum.
+After it gets through all elements it goes to a if statement t ocheck if it is divisble by 10. This is done with finding the remainder to be 0.
+It then prints out whether or not it is a valid card.
